@@ -29,6 +29,18 @@ Also, addon adds **Play** button to quest log menu (QuestGuru supported)
 Addon contains sound files not for all quests. if u see in chat something like "QuestVoice: {QuestTitle} ({QuestID}) - accepted"
 but don't here any sound, you can check if this file exists in QuestVoice\voices folder.
 
+### Coverage
+**Races**:
+- orcs
+- trolls
+- goblins
+- taurens
+- undead
+- nightelf
+
+**Locations**:
+
+Almost all Classic expansion
 
 # Screenshots
 
