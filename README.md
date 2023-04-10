@@ -6,7 +6,10 @@ QuestVoice is based on the open-source project available at https://github.com/m
 
 Download last version of QuestVoice from Releases page now and start exploring the world of Azeroth with a whole new level of immersion!
 
-## Screenshots
+# Screenshots
 
+## QuestGuru Play button
 ![QuestGuru Play button](screenshots/QuestGuru.png?raw=true "QuestGuru Play button")
+
+## Native quest log Play button
 ![QuestGuru Play button](screenshots/native.png?raw=true "Native Play button")
