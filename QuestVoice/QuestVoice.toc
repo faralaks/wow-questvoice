@@ -1,0 +1,9 @@
+## Interface: 30300 
+## Title: QuestVoice
+## Author: Faralaks 
+## Version: 1.0
+## X-eMail: noname@gmail.com 
+## Notes: Addon for Audio Quests Playback
+
+embeds.xml
+core.lua

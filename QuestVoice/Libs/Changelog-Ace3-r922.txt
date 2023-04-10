@@ -1,0 +1,44 @@
+------------------------------------------------------------------------
+r922 | nevcairiel | 2010-05-13 09:40:08 +0000 (Thu, 13 May 2010) | 1 line
+Changed paths:
+   M /trunk/AceGUI-3.0/widgets/AceGUIWidget-Label.lua
+
+AceGUI-3.0: Cleanup and refactoring of the Label widget. It'll properly reset its font now (Ticket #108)
+------------------------------------------------------------------------
+r921 | nevcairiel | 2010-05-09 15:49:14 +0000 (Sun, 09 May 2010) | 1 line
+Changed paths:
+   M /trunk/AceConfig-3.0/AceConfigDialog-3.0/AceConfigDialog-3.0.lua
+   M /trunk/AceConfig-3.0/AceConfigRegistry-3.0/AceConfigRegistry-3.0.lua
+
+AceConfigDialog-3.0: Implement "softMin" and "softMax", allowing for a UI-specific minimum/maximum for range controls, while allowing manual input of values in the old min/max range. (Ticket #123)
+------------------------------------------------------------------------
+r920 | nevcairiel | 2010-05-09 11:56:42 +0000 (Sun, 09 May 2010) | 1 line
+Changed paths:
+   M /trunk/AceGUI-3.0/widgets/AceGUIWidget-MultiLineEditBox.lua
+
+AceGUI-3.0: Rewrite of the MultiLineEditBox based on the code by Vexxilus  (Ticket #68) - Needs Testing!
+------------------------------------------------------------------------
+r919 | nevcairiel | 2010-05-09 11:36:03 +0000 (Sun, 09 May 2010) | 4 lines
+Changed paths:
+   M /trunk/AceGUI-3.0/AceGUI-3.0.lua
+
+AceGUI-3.0:
+- Fix a error when showing the "Widget has no OnRelease" error message (Ticket #130)
+- Added GetWidgetCount API (Ticket #128)
+- Added GetWidgetVersion API (Ticket #127)
+------------------------------------------------------------------------
+r918 | nevcairiel | 2010-05-09 11:31:27 +0000 (Sun, 09 May 2010) | 4 lines
+Changed paths:
+   M /trunk/AceConfig-3.0/AceConfigDialog-3.0/AceConfigDialog-3.0.lua
+
+AceConfigDialog-3.0:
+- Removed an unused table (Ticket #124)
+- Simplified FeedOptions for multiline editboxes (Ticket #129)
+
+------------------------------------------------------------------------
+r917 | ammo | 2010-03-16 14:09:34 +0000 (Tue, 16 Mar 2010) | 1 line
+Changed paths:
+   M /trunk/AceGUI-3.0/widgets/AceGUIWidget-CheckBox.lua
+
+AceGUI-3.0: CheckBox: check for self.desc:GetText() being nil as well as "" to prevent setting the wrong height on the checkbox causing bouncing checkboxes
+------------------------------------------------------------------------
