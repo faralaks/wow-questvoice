@@ -1,8 +1,12 @@
 # QuestVoice - WoW 3.3.5a Addon for Audio Quests Playback
 
-QuestVoice is an add-on for World of Warcraft version 3.3.5a that provides a unique and immersive experience for questing. With QuestVoice, you can listen to AI-generated voiceovers for almost all quests, making the game feel more like an audiobook and allowing you to fully immerse yourself in the story. This add-on adds a new dimension to questing, making it easier to follow the storyline and understand the quest objectives.
+QuestVoice is an add-on for World of Warcraft version 3.3.5a that provides a unique and immersive experience for questing.
+With QuestVoice, you can listen to AI-generated voiceovers for almost all quests, making the game feel more like an audiobook
+and allowing you to fully immerse yourself in the story. This add-on adds a new dimension to questing, making it easier to
+follow the storyline and understand the quest objectives.
 
-QuestVoice is based on the open-source project available at https://github.com/mrthinger/wow-voiceover. By leveraging cutting-edge natural language processing technology, QuestVoice brings a new level of immersion to World of Warcraft.
+QuestVoice is based on the open-source project available at https://github.com/mrthinger/wow-voiceover. By leveraging
+cutting-edge natural language processing technology, QuestVoice brings a new level of immersion to World of Warcraft.
 
 Download last version of QuestVoice from Releases page now and start exploring the world of Azeroth with a whole new level of immersion!
 
@@ -19,7 +23,11 @@ If addon installed successfully it prints corresponding message when you enter t
 # Usage
 If addon installed successfully everytime you start or complete quest it plays the pre-generated audio file.
 
-Also, addon adds **Plat** button to quest log menu (QuestGuru supported)
+Also, addon adds **Play** button to quest log menu (QuestGuru supported)
+
+# Note
+Addon contains sound files not for all quests. if u see in chat something like "QuestVoice: {QuestTitle} ({QuestID}) - accepted"
+but don't here any sound, you can check if this file exists in QuestVoice\voices folder.
 
 
 # Screenshots
