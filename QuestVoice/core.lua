@@ -1,6 +1,9 @@
-local Main = LibStub("AceAddon-3.0"):NewAddon("QuestVoice")
+addonName = "QuestVoice"
+addonVer = "v1.0.1"
+
+Main = LibStub("AceAddon-3.0"):NewAddon(addonName)
 LibStub("AceEvent-3.0"):Embed(Main)
-local Timer = LibStub("AceTimer-3.0")
+Timer = LibStub("AceTimer-3.0")
 
 function Main:OnDisable() end
 function Main:OnInitialize() end
@@ -10,7 +13,7 @@ function Main:OnEnable()
     Main:RegisterEvent("QUEST_ACCEPTED", "Started")
     Main:RegisterEvent("QUEST_COMPLETE", "Finished")
 
-    print("QuestVoice By Faralaks Started!");
+    print(addonName, addonVer, "By Faralaks Started!");
 
     local x, y, width, height = -90, 13, 75, 23
     if IsAddOnLoaded("QuestGuru") then
@@ -25,14 +28,17 @@ function Main:OnEnable()
     frame:SetScript("OnClick", Main.Selected)
 end
 
-function Play(id, name, action)
-    local voice = id .. "-" .. action
-    PlaySoundFile("interface\\addons\\QuestVoice\\voices\\"..voice..".mp3")
-    print("QuestVoice:", name, "("..id..")", action)
+function Main:Play()
+    local voice = Main.id .. "-" .. Main.action
+    PlaySoundFile("interface\\addons\\"..addonName.."\\voices\\"..voice..".mp3")
+    print(addonName..":", Main.name, "("..Main.id..")", Main.action)
 end
 
 function Main:WaitThenPlay(id, name, action, wait)
-    Timer.ScheduleTimer(Main, Play, wait, id, name, action)
+    Main.id = id
+    Main.name = name
+    Main.action = action
+    Timer.ScheduleTimer(Main, "Play", wait)
 end
 
 
@@ -54,10 +60,23 @@ function Main:Finished()
     Main:WaitThenPlay(id, name, "complete", 0.3)
 end
 
+function ClearOne(rawName)
+    local _, _, cleared = string.find(rawName, "%[%d+%] (.+)")
+    return cleared
+end
+
+function Clear(name)
+    while string.sub(name, 1, 1) == "[" do
+        name = ClearOne(name)
+    end
+    return name
+end
+
 
 function Find(find)
     for i = 1, GetNumQuestLogEntries() do
         local name, _, _, _, _, _, _, _,  id = GetQuestLogTitle(i)
+        name = Clear(name)
         if name == find then
             return id
         end
