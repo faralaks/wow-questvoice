@@ -24,7 +24,7 @@ function Main:Init()
     local mode ="Native"
 
     if IsAddOnLoaded("Carbonite") then
-        x, y, width, height, parent, anchor = 5, 0, 55, 22, NxButPlayer, NxButPlayer
+        x, y, width, height, parent, anchor = -60, -5, 55, 22, NxQuestD, NxQuestD
         anchorBy, anchorTo, mode = "TOPLEFT", "TOPRIGHT",  "Carbonite"
 
     elseif IsAddOnLoaded("QuestGuru") then
@@ -36,10 +36,13 @@ function Main:Init()
     frame:SetWidth(width)
     frame:SetHeight(height)
     frame:SetPoint(anchorBy, anchor, anchorTo, x, y)
+    frame:SetNormalTexture("Interface\\Buttons\\UI-Panel-Button-Up")
+    frame:SetHighlightTexture("Interface\\Buttons\\UI-Panel-Button-Highlight")
+    frame:SetPushedTexture("Interface\\Buttons\\UI-Panel-Button-Down")
+    frame:SetDisabledTexture("Interface\\Buttons\\UI-Panel-Button-Disabled")
     frame:SetScript("OnClick", Main.Selected)
 
     print(addonName, addonVer, "By Faralaks Started in", mode, "mode!")
-
 end
 
 function Main:Play()
