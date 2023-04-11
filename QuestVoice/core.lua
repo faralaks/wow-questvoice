@@ -13,19 +13,33 @@ function Main:OnEnable()
     Main:RegisterEvent("QUEST_ACCEPTED", "Started")
     Main:RegisterEvent("QUEST_COMPLETE", "Finished")
 
-    print(addonName, addonVer, "By Faralaks Started!");
+    Timer.ScheduleTimer(Main, "Init", 2)
+end
 
-    local x, y, width, height = -90, 13, 75, 23
-    if IsAddOnLoaded("QuestGuru") then
-        x, y, width, height = -230, 22, 75, 21
+function Main:Init()
+    local x, y = -90, 13
+    local width, height = 75, 23
+    local parent, anchor =   QuestLogFrame, QuestLogFrame
+    local anchorBy, anchorTo = "BOTTOMRIGHT", "BOTTOMRIGHT"
+    local mode ="Native"
+
+    if IsAddOnLoaded("Carbonite") then
+        x, y, width, height, parent, anchor = 5, 0, 55, 22, NxButPlayer, NxButPlayer
+        anchorBy, anchorTo, mode = "TOPLEFT", "TOPRIGHT",  "Carbonite"
+
+    elseif IsAddOnLoaded("QuestGuru") then
+        x, y, width, height, mode = -230, 22, 75, 21, "QuestGuru"
     end
 
-    local frame = CreateFrame("Button", "PlayButton", QuestLogFrame, "UIPanelButtonTemplate")
+    local frame = CreateFrame("Button", "PlayButton", parent, "UIPanelButtonTemplate")
     frame:SetText("Play")
     frame:SetWidth(width)
     frame:SetHeight(height)
-    frame:SetPoint("BOTTOMRIGHT", QuestLogFrame, "BOTTOMRIGHT", x, y)
+    frame:SetPoint(anchorBy, anchor, anchorTo, x, y)
     frame:SetScript("OnClick", Main.Selected)
+
+    print(addonName, addonVer, "By Faralaks Started in", mode, "mode!")
+
 end
 
 function Main:Play()
