@@ -8,5 +8,5 @@
 embeds.xml
 
 QuestVoice.lua
-quest_lookups.lua
-gossip_lookups.lua
+voice_search\gossipToVoice.lua
+voice_search\questToVoice.lua
