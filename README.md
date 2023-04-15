@@ -21,12 +21,13 @@ Download last version of QuestVoice from Releases page now and start exploring t
 If addon installed successfully it prints corresponding message when you enter the game world
 
 # Usage
-If addon installed successfully everytime you start or complete quest it plays the pre-generated audio file.
+If addon installed successfully almost everytime you start or complete quest or just speak to NPC
+it plays the pre-generated audio file.
 
 Also, addon adds **Play** button to quest log menu (QuestGuru supported)
 
 # Note
-Pre-generated content not alwats the same as quest text ([Issue #3](https://github.com/Faralaks/wow-questvoice/issues/3)).
+Pre-generated content not always the same as quest text ([Issue #3](https://github.com/Faralaks/wow-questvoice/issues/3)).
 
 Addon contains sound files not for all quests. if u see in chat something like "QuestVoice: {QuestTitle} ({QuestID}) - accepted"
 but don't here any sound, you can check if this file exists in QuestVoice\voices folder.
@@ -42,7 +43,7 @@ but don't here any sound, you can check if this file exists in QuestVoice\voices
 
 **Locations**:
 
-Almost all Classic expansion
+Almost whole Classic expansion
 
 # Screenshots
 
