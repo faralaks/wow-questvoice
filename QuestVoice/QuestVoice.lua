@@ -1,6 +1,11 @@
 addonName = "QuestVoice"
 addonVer = "v1.0.3"
 
+AcceptAction = "accept"
+CompleteAction = "complete"
+QuestType = "quest"
+GossipType = "gossip"
+
 Main = LibStub("AceAddon-3.0"):NewAddon(addonName)
 LibStub("AceEvent-3.0"):Embed(Main)
 Timer = LibStub("AceTimer-3.0")
@@ -45,16 +50,47 @@ function Main:Init()
     print(addonName, addonVer, "By Faralaks Started in", mode, "mode!")
 end
 
-function Main:Play()
-    local voice = Main.id .. "-" .. Main.action
-    PlaySoundFile("interface\\addons\\"..addonName.."\\voices\\quests\\"..voice..".mp3")
-    print(addonName..":", Main.name, "("..Main.id..")", Main.action)
+function BuildVoiceAndDescription(type, id, name, action)
+    local dir = "interface\\addons\\"..addonName.."\\voices\\"..type.."\\"
+    local voice = ""
+    local description = ""
+
+    if type == "quest" then
+        voice = dir..id.."-"..action..".mp3"
+        description = name.." ("..id..") "..action
+        return voice, description
+
+    elseif type == "gossip" then
+        voice = dir..id..".mp3"
+        description = name.." ("..id..") "
+        return voice, description
+
+    end
+
+    print(addonName, "Error: Unknown type:", type)
+    return nil, nil
 end
 
-function Main:WaitThenPlay(id, name, action, wait)
-    Main.id = id
-    Main.name = name
-    Main.action = action
+function Main:Play(voice, voiceDescription)
+    if voice == nil then
+        voice = self.voice
+    end
+
+    if voiceDescription == nil then
+        voiceDescription = self.voiceDescription
+    end
+
+    if voice == nil then
+        print(addonName, "Error: No voice is nil!")
+        return nil
+    end
+
+    PlaySoundFile(voice)
+    print(addonName..":", voiceDescription, "Voice:", voice)
+end
+
+function Main:WaitThenPlay(type, id, name, action, wait)
+    self.voice, self.voiceDescription = BuildVoiceAndDescription(type, id, name, action)
     Timer.ScheduleTimer(Main, "Play", wait)
 end
 
@@ -62,19 +98,19 @@ end
 function Main:Selected()
     local questIndex = GetQuestLogSelection()
     local name, _, _, _, _, _, _, _,  id = GetQuestLogTitle(questIndex)
-    Main:WaitThenPlay(id, name, "accept", 0.3)
+    Main:WaitThenPlay(QuestType, id, name, AcceptAction, 0.3)
 end
 
 
 function Main:Started(_, questIndex)
     local name, _, _, _, _, _, _, _,  id = GetQuestLogTitle(questIndex)
-    Main:WaitThenPlay(id, name, "accept", 1)
+    Main:WaitThenPlay(QuestType, id, name, AcceptAction, 1)
 end
 
 function Main:Finished()
     local name = GetTitleText()
     local id = Find(name)
-    Main:WaitThenPlay(id, name, "complete", 0.3)
+    Main:WaitThenPlay(QuestType, id, name, CompleteAction, 0.3)
 end
 
 function ClearOne(rawName)
