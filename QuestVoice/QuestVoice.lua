@@ -1,5 +1,5 @@
 addonName = "QuestVoice"
-addonVer = "v1.0.1"
+addonVer = "v1.0.3"
 
 Main = LibStub("AceAddon-3.0"):NewAddon(addonName)
 LibStub("AceEvent-3.0"):Embed(Main)
@@ -47,7 +47,7 @@ end
 
 function Main:Play()
     local voice = Main.id .. "-" .. Main.action
-    PlaySoundFile("interface\\addons\\"..addonName.."\\voices\\"..voice..".mp3")
+    PlaySoundFile("interface\\addons\\"..addonName.."\\voices\\quests\\"..voice..".mp3")
     print(addonName..":", Main.name, "("..Main.id..")", Main.action)
 end
 
