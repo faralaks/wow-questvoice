@@ -10,3 +10,4 @@ embeds.xml
 QuestVoice.lua
 voice_search\gossipToVoice.lua
 voice_search\questToVoice.lua
+voice_search\fuzzySearch.lua
