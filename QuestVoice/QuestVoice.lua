@@ -17,8 +17,9 @@ function Main:OnInitialize() end
 function Main:OnEnable()
     Main:RegisterEvent("QUEST_ACCEPTED", "Started")
     Main:RegisterEvent("QUEST_COMPLETE", "Finished")
+    Main:RegisterEvent("GOSSIP_SHOW", "Gossip")
 
-    Timer.ScheduleTimer(Main, "Init", 2)
+    Timer.ScheduleTimer(Main, "Init", 1)
 end
 
 function Main:Init()
@@ -86,12 +87,60 @@ function Main:Play(voice, voiceDescription)
     end
 
     PlaySoundFile(voice)
-    print(addonName..":", voiceDescription, "Voice:", voice)
+    print(addonName..":", voiceDescription)
 end
 
 function Main:WaitThenPlay(type, id, name, action, wait)
     self.voice, self.voiceDescription = BuildVoiceAndDescription(type, id, name, action)
     Timer.ScheduleTimer(Main, "Play", wait)
+end
+
+function Main:Gossip()
+    if not UnitExists("target") then
+        return
+    end
+
+    local gossipText = GetGossipText()
+    local guid = tonumber(UnitGUID("target"):sub(6, -7), 16)
+    local targetName = UnitName("target")
+
+    --print("GOSSIP_SHOW", guid, targetName, "RawID:", UnitGUID("target"):sub(6, -7));
+    local voiceID = GossipToVoice(guid, gossipText)
+    if voiceID == nil then
+        print(addonName, "Error: No voice found for", targetName, "("..guid..")")
+        return
+    end
+
+    Main.voice, Main.voiceDescription = BuildVoiceAndDescription(GossipType, voiceID, targetName)
+    Main:Play()
+end
+
+function GossipToVoice(npcID, gossipText)
+    local npcTexts2Voices = NPCToTextToTemplateHash[npcID]
+    if not npcTexts2Voices then
+        return nil
+    end
+
+    local voicesCount, searchResult = 0, ""
+    local npcTexts = {}
+    for text, _ in pairs(npcTexts2Voices) do
+        table.insert(npcTexts, text)
+        voicesCount = voicesCount + 1
+        searchResult = text
+    end
+
+    if voicesCount == 1 then
+        return npcTexts2Voices[searchResult]
+    end
+
+    searchResult = VOICEOVER_fuzzySearchBest(gossipText, npcTexts)
+    if searchResult == nil then
+        print("searchResult is nil! but Count is", voicesCount)
+        return nil
+    end
+
+    searchResult = searchResult.text
+    return npcTexts2Voices[searchResult]
 end
 
 
