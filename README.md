@@ -57,6 +57,7 @@ Almost whole Classic expansion
 ## Carbonite quest log Play button
 ![Carbonite Play button](screenshots/Carbonite.png?raw=true "Native Play button")
 
-
+## NPC Dialog Play button
+![Gossip Play button](screenshots/gossip.png?raw=true "Gossip Play button")
 
 ## Made with Love to [WoW HD Client](https://discord.gg/wotlk-3-3-5a-hd-client-858041817043042364) - best wow 3.3.5a client ever!
