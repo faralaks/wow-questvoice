@@ -28,7 +28,7 @@ function Main:Init()
     local mode ="Native"
 
     local questMenuButton = {
-        name = "PlayButton",
+        name = "PlayQuestButton",
         x = -90,
         y = 13,
         width = 75,
@@ -49,7 +49,22 @@ function Main:Init()
         questMenuButton.x, questMenuButton.y, questMenuButton.width, questMenuButton.height, mode = -230, 22, 75, 21, "QuestGuru"
     end
 
+    local gossipButton = {
+        name = "PlaGossipyButton",
+        x = -120,
+        y = 72,
+        width = 75,
+        height = 24,
+        parent = GossipFrame,
+        anchor = GossipFrame,
+        anchorBy = "BOTTOMRIGHT",
+        anchorTo = "BOTTOMRIGHT",
+        text = "Play",
+        onClick = Main.Gossip,
+    }
+
     SetupButton(questMenuButton)
+    SetupButton(gossipButton)
     print(addonName, addonVer, "By Faralaks Started in", mode, "mode!")
 end
 
