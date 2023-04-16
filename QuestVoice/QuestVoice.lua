@@ -22,33 +22,48 @@ function Main:OnEnable()
     Timer.ScheduleTimer(Main, "Init", 1)
 end
 
+
+
 function Main:Init()
-    local x, y = -90, 13
-    local width, height = 75, 23
-    local parent, anchor =   QuestLogFrame, QuestLogFrame
-    local anchorBy, anchorTo = "BOTTOMRIGHT", "BOTTOMRIGHT"
     local mode ="Native"
 
+    local questMenuButton = {
+        name = "PlayButton",
+        x = -90,
+        y = 13,
+        width = 75,
+        height = 23,
+        parent = QuestLogFrame,
+        anchor = QuestLogFrame,
+        anchorBy = "BOTTOMRIGHT",
+        anchorTo = "BOTTOMRIGHT",
+        text = "Play",
+        onClick = Main.Selected,
+    }
+
     if IsAddOnLoaded("Carbonite") then
-        x, y, width, height, parent, anchor = -60, -5, 55, 22, NxQuestD, NxQuestD
-        anchorBy, anchorTo, mode = "TOPLEFT", "TOPRIGHT",  "Carbonite"
+        questMenuButton.x, questMenuButton.y, questMenuButton.width, questMenuButton.height, questMenuButton.parent, questMenuButton.anchor = -60, -5, 55, 22, NxQuestD, NxQuestD
+        questMenuButton.anchorBy, questMenuButton.anchorTo, mode = "TOPLEFT", "TOPRIGHT",  "Carbonite"
 
     elseif IsAddOnLoaded("QuestGuru") then
-        x, y, width, height, mode = -230, 22, 75, 21, "QuestGuru"
+        questMenuButton.x, questMenuButton.y, questMenuButton.width, questMenuButton.height, mode = -230, 22, 75, 21, "QuestGuru"
     end
 
-    local frame = CreateFrame("Button", "PlayButton", parent, "UIPanelButtonTemplate")
-    frame:SetText("Play")
-    frame:SetWidth(width)
-    frame:SetHeight(height)
-    frame:SetPoint(anchorBy, anchor, anchorTo, x, y)
+    SetupButton(questMenuButton)
+    print(addonName, addonVer, "By Faralaks Started in", mode, "mode!")
+end
+
+function SetupButton(button)
+    local frame = CreateFrame("Button", button.name, button.parent, "UIPanelButtonTemplate")
+    frame:SetText(button.text)
+    frame:SetWidth(button.width)
+    frame:SetHeight(button.height)
+    frame:SetPoint(button.anchorBy, button.anchor, button.anchorTo, button.x, button.y)
     frame:SetNormalTexture("Interface\\Buttons\\UI-Panel-Button-Up")
     frame:SetHighlightTexture("Interface\\Buttons\\UI-Panel-Button-Highlight")
     frame:SetPushedTexture("Interface\\Buttons\\UI-Panel-Button-Down")
     frame:SetDisabledTexture("Interface\\Buttons\\UI-Panel-Button-Disabled")
-    frame:SetScript("OnClick", Main.Selected)
-
-    print(addonName, addonVer, "By Faralaks Started in", mode, "mode!")
+    frame:SetScript("OnClick", button.onClick)
 end
 
 function BuildVoiceAndDescription(type, id, name, action)
