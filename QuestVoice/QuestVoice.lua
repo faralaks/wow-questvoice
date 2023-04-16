@@ -1,5 +1,5 @@
 addonName = "QuestVoice"
-addonVer = "v1.0.3"
+addonVer = "v1.0.4"
 
 AcceptAction = "accept"
 CompleteAction = "complete"
@@ -9,6 +9,8 @@ GossipType = "gossip"
 Main = LibStub("AceAddon-3.0"):NewAddon(addonName)
 LibStub("AceEvent-3.0"):Embed(Main)
 Timer = LibStub("AceTimer-3.0")
+
+Main.played = {}
 
 function Main:OnDisable() end
 function Main:OnInitialize() end
@@ -60,7 +62,7 @@ function Main:Init()
         anchorBy = "BOTTOMRIGHT",
         anchorTo = "BOTTOMRIGHT",
         text = "Play",
-        onClick = Main.Gossip,
+        onClick = function() Main.Gossip(Main,"CUSTOM_BUTTON_CLICKED", true) end,
     }
 
     SetupButton(questMenuButton)
@@ -125,7 +127,7 @@ function Main:WaitThenPlay(type, id, name, action, wait)
     Timer.ScheduleTimer(Main, "Play", wait)
 end
 
-function Main:Gossip()
+function Main:Gossip(event, playAnyWay)
     if not UnitExists("target") then
         return
     end
@@ -141,8 +143,13 @@ function Main:Gossip()
         return
     end
 
-    Main.voice, Main.voiceDescription = BuildVoiceAndDescription(GossipType, voiceID, targetName)
-    Main:Play()
+    if not (Main.played[voiceID] == nil) and not playAnyWay then
+        return
+    end
+
+    self.played[voiceID] = true
+    self.voice, self.voiceDescription = BuildVoiceAndDescription(GossipType, voiceID, targetName)
+    self:Play()
 end
 
 function GossipToVoice(npcID, gossipText)
