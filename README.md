@@ -24,7 +24,7 @@ If addon installed successfully it prints corresponding message when you enter t
 If addon installed successfully almost everytime you start or complete quest or just speak to NPC
 it plays the pre-generated audio file.
 
-Also, addon adds **Play** button to quest log menu (QuestGuru supported)
+Also, addon adds **Play** button to quest log menu (QuestGuru and Carbonite are supported) and to NPC dialog window.
 
 # Note
 Pre-generated content not always the same as quest text ([Issue #3](https://github.com/Faralaks/wow-questvoice/issues/3)).
